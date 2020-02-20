@@ -1,4 +1,7 @@
 const db = require('../models/dbIndex');
+const slotController = {};
+
+
 
 const createSlot = async (req, res, next) => {
   try{
