@@ -1,5 +1,6 @@
 import React from 'react';
 
+// passed props should have Event Information
 function EventEdit(props) {
 
   const times = [];
@@ -16,7 +17,6 @@ function EventEdit(props) {
 
   return (
     <div>
-      <p>Still here ...</p>
       <form action="/defaultAction" id="eventForm" method="post">
         <label for="eName">Event Name:</label>
         <input type="text" id="eName" name="eName"></input>
