@@ -4,12 +4,12 @@ const subsController = {};
 
 	subsController.createSub = async (req, res, next) => {
 	try{
-		console.log('IM HERE');
-		//todo: const queryText = 'INSERT INTO subscriptions VALUES(DEFAULT, $1, $2, $3, DEFAULT) RETURNING u_id';
-		//todo :const { name, password, email } = req.body;
-		//todo: console.log(name, password, email);
-		const { rows } = await db.query(queryText, [name, password, email]);
-		//todo: this should return the u_id of the created user OK
+		console.log('IM HERE')
+		const queryText = 'INSERT INTO subscriptions VALUES(DEFAULT, $1, $2, $3, $4,  DEFAULT) RETURNING u_id';
+		const { event, organization, start_time, end_time} = req.body;
+		const { rows } = await db.query(queryText, [event, organization, start_time, end_time]);
+		console.log(rows[0]);
+		//todo: this should return the u_id of the created user
 		res.locals.data = rows[0];
 		return next();
 	} catch (error) {
@@ -28,18 +28,17 @@ subsController.updateSub = async (req, res, next) => {
 	// }
 }
 subsController.deleteSub = async (req, res, next) => {
-	try{
-		const {u_id} = req.params;
-		const queryText = 'DELETE FROM subscriptions WHERE u_id = $1';
-		const { rows } = await db.query(queryText, [u_id]);
-		console.log(rows[0]);
-		res.locals.data = rows[0];
-		return next();
-	}
-	catch(error){
-		await db.query( 'ROLLBACK' );
-		return next(error);
-	}
+	const {id} = req.body;
+	const query = 'DELETE FROM "Subscriptions" WHERE _id = $1';
+	const arr = [id];
+	
+	db.query(query, arr, err => {
+		if (err) {
+			return next(err)
+		} else {
+			return next();
+		}
+	})
 };
 
 //
