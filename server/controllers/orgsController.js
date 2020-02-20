@@ -67,7 +67,7 @@ orgsController.getOrgs = async (req, res, next) => {
 			return next();
 		}
 		console.log('plain get route');
-		const queryText = 'SELECT * FROM organizations ORDER BY name;';
+		const queryText = 'SELECT * FROM organizations;';
 		const { rows } = await db.query(queryText, []);
 		console.log(rows);
 		res.locals.data = [...rows];
