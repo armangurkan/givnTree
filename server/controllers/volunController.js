@@ -17,16 +17,18 @@ volunController.createVolun = async (req, res, next) => {
 		return next(error);
 	}
 };
-volunController.updateVolun = async (req, res, next) => {
-	// try{
-	// 	const
-	//
-	// }
-	// catch(e){
-	// 	await db.query('ROLLBACK');
-	// 	return next(e)
-	// }
-}
+
+// volunController.updateVolun = async (req, res, next) => {
+// 	// try{
+// 	// 	const
+// 	//
+// 	// }
+// 	// catch(e){
+// 	// 	await db.query('ROLLBACK');
+// 	// 	return next(e)
+// 	// }
+// }
+
 volunController.deleteVolun = async (req, res, next) => {
 	try{
 		const {u_id} = req.params;
@@ -41,8 +43,6 @@ volunController.deleteVolun = async (req, res, next) => {
 		return next(error);
 	}
 };
-
-//
 
 volunController.getVoluns = async (req, res, next) => {
 	try{
@@ -73,5 +73,6 @@ volunController.getVoluns = async (req, res, next) => {
 		return next(error);
 	}
 }
+
 
 module.exports = volunController;
