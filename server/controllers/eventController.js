@@ -1,7 +1,7 @@
 const db = require('../models/dbIndex');
 
 
-const eventController = {};
+const eventController = {}
 
 
 
@@ -57,7 +57,7 @@ eventController.getEvents = async (req, res, next) => {
 				values: [String(filterId)],
 				rowMode: 'array',
 			}
-			console.log('i am about to run the aaaaaaa for getting Eventteers with', queryText);
+			console.log('i am about to run the aaaaaaa for getting Orgteers with', queryText);
 			const response = await db.query(query);
 			console.log('these are the rows', response);
 			res.locals.data = response.rows[0];

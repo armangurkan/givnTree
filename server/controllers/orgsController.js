@@ -43,7 +43,7 @@ orgsController.deleteOrg = async (req, res, next) => {
 
 //
 
-orgsController.getorgs = async (req, res, next) => {
+orgsController.getOrgs = async (req, res, next) => {
 	try{
 		const {filterElement, filterId, returnElements} = req.params;
 		console.log(filterElement, filterId, returnElements);

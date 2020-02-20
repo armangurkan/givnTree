@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const orgsController = require('../controllers/orgsController');
+const authController = require('../controllers/authController');
 
-
-router.post('/create', orgsController.createOrg, (req, res) => {
+router.post('/create', orgsController.createOrg, authController.addCookie, (req, res) => {
 	return res.status(200).send(JSON.stringify(res.locals.data));
 });
 
