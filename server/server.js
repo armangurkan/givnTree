@@ -20,6 +20,10 @@ const path = require('path');
 * todo: add routers here
  */
 const volunRouter = require('./routs/volunRouter');
+const slotRouter = require('./routs/slotRouter');
+const subsRouter = require('./routs/subsRouter');
+const orgsRouter = require('./routs/orgsRouter');
+const eventRouter = require('./routs/eventRouter');
 
 
 
@@ -33,11 +37,12 @@ app.use(bodyParser.json());
 
 
 //========== Routes ==========//
-
+app.use('/subscriptions', subsRouter);
+app.use('/organizations', orgsRouter);
 app.use('/volunteer', volunRouter);
-app.get('/ping', function (req, res) {
-	return res.send('pong');
-});
+app.use('/events', eventRouter);
+app.use('/slots', slotRouter);
+
 
 app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));
