@@ -1,9 +1,9 @@
 const db = require('../models/dbIndex');
 
-const createSlot = async (req, res, next) => {
+const createSub = async (req, res, next) => {
   try{
 		console.log('IM HERE')
-		const queryText = 'INSERT INTO slots VALUES(DEFAULT, $1, $2, $3, $4,  DEFAULT) RETURNING u_id';
+		const queryText = 'INSERT INTO subscriptions VALUES(DEFAULT, $1, $2, $3, $4,  DEFAULT) RETURNING u_id';
 		const { event, organization, start_time, end_time} = req.body;
 		const { rows } = await db.query(queryText, [event, organization, start_time, end_time]);
 		console.log(rows[0]);
@@ -16,14 +16,14 @@ const createSlot = async (req, res, next) => {
 	}
 }
 
-// const updateSlot = (req, res, next) => {
-//   const {id, event, organization, start_time, end_time} = req.body;
-//   const query = 'UPDATE "Slots"'
+// const updateSub = (req, res, next) => {
+//   const {id, volunteer, slot} = req.body;
+//   const query = 'UPDATE "Subscriptions"'
 // }
 
-const deleteSlot = (req, res, next) => {
+const deleteSub = (req, res, next) => {
   const {id} = req.body;
-  const query = 'DELETE FROM "Slots" WHERE _id = $1';
+  const query = 'DELETE FROM "Subscriptions" WHERE _id = $1';
   const arr = [id];
 
   db.query(query, arr, err => {
@@ -35,11 +35,11 @@ const deleteSlot = (req, res, next) => {
   })
 }
 
-// const getSlots...
+// const getSubs 
 
 module.exports = {
-  // updateSlot,
-  deleteSlot,
-  createSlot
-  // getSlots
+  // updateSub,
+  deleteSub,
+  // getSubs,
+  createSub
 }
