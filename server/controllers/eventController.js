@@ -19,10 +19,10 @@ eventController.createEvent = async (req, res, next) => {
 	}
 }
 
-// eventController.updateEvent = (req, res, next) => {
-//   const {id, name, organization, start_time, end_time, description,} = req.body;
-//   const query = 'UPDATE "Events" '
-// }
+eventController.updateEvent = async(req, res, next) => {
+  const {fieldToChange} = req.body;
+  const query = 'UPDATE "Events" '
+}
 
 eventController.deleteEvent = (req, res, next) => {
 	const {id} = req.body;

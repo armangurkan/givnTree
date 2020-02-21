@@ -4,6 +4,7 @@ const slotController = {};
 
 
 slotController.createSlot = async (req, res, next) => {
+	console.log(req);
 	try{
 		console.log('IM HERE')
 		const queryText = 'INSERT INTO slots VALUES(DEFAULT, $1, $2, $3, $4,  DEFAULT) RETURNING u_id';
@@ -19,10 +20,28 @@ slotController.createSlot = async (req, res, next) => {
 	}
 }
 
-// slotController.updateSlot = (req, res, next) => {
-//   const {id, event, organization, start_time, end_time} = req.body;
-//   const query = 'UPDATE "Slots"'
-// }
+slotController.updateSlot = async (req, res, next) => {
+  try {
+    const {u_id, ...rest} = req.body;
+    const queryText = `UPDATE slots SET `;
+    for (const key in rest) {
+      queryText += `${key} = ${rest[key]} ,`
+    }
+    queryText = queryText.slice(0, queryText.length - 1);
+	  queryText +=  ` WHERE u_id = $1`;
+	  const query = {
+		  text: queryText,
+		  values: [String(u_id)],
+		  rowMode: 'array',
+	  }
+	  const response = await db.query(query);
+	  console.log('these are the rows', response);
+	  res.locals.data = response.rows[0];
+	  return next();
+  } catch(error){
+  	return next(error);
+  }
+}
 
 slotController.deleteSlot = (req, res, next) => {
 	const {id} = req.body;
