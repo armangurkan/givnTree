@@ -1,5 +1,8 @@
 const db = require('../models/dbIndex');
 const eventController = {};
+
+
+
 eventController.createEvent = async (req, res, next) => {
 	try{
 		console.log('IM HERE')
