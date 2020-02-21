@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const slotController = require('../controllers/slotController');
+const subsController = require('../controllers/subsController');
 
-router.post('/create', slotController.createSlot, (req, res) => {
+
+router.post('/create', subsController.createSub, (req, res) => {
 	return res.status(200).send(JSON.stringify(res.locals.data));
 });
 
-router.delete('/:u_id',slotController.deleteSlot, (req, res) => {
+router.delete('/:u_id',subsController.deleteSub, (req, res) => {
 	return res.status(200).send(JSON.stringify(res.locals.data));
 });
 
-router.get('/get/:filterElement?/:filterId?/:returnElements?', slotController.getSlots, (req, res) => {
+router.get('/get/:filterElement?/:filterId?/:returnElements?', subsController.getSubs, (req, res) => {
 	return res.status(200).send(JSON.stringify(res.locals.data));
 });
 
-router.post('/:id', slotController.updateSlot, (req, res) => {
+router.post('/:id', subsController.updateSub, (req, res) => {
 	return res.status(200).send(JSON.stringify(res.locals.data));
 });
 module.exports = router;

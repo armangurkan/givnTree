@@ -15,18 +15,15 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 
 //============== Internal Dependency Requirements ======//
-// * @ add controllers here
-// * @ add routers here
 /*
 * todo: add controllers here
 * todo: add routers here
  */
 const volunRouter = require('./routs/volunRouter');
-const orgRouter = require('./routs/orgRouter');
-const subRouter = require('./routs/subRouter');
-const eventRouter = require('./routs/eventRouter');
 const slotRouter = require('./routs/slotRouter');
-
+const subsRouter = require('./routs/subsRouter');
+const orgsRouter = require('./routs/orgsRouter');
+const eventRouter = require('./routs/eventRouter');
 
 
 
@@ -40,14 +37,12 @@ app.use(bodyParser.json());
 
 
 //========== Routes ==========//
-
+app.use('/subscriptions', subsRouter);
+app.use('/organizations', orgsRouter);
 app.use('/volunteer', volunRouter);
-app.use('/organization', orgRouter);
 app.use('/events', eventRouter);
+app.use('/slots', slotRouter);
 
-app.get('/ping', function (req, res) {
-	return res.send('pong');
-});
 
 app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname, 'build', 'index.html'));

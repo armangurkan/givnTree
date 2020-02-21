@@ -47,18 +47,24 @@ volunController.deleteVolun = async (req, res, next) => {
 volunController.getVoluns = async (req, res, next) => {
 	try{
 		const {filterElement, filterId, returnElements} = req.params;
+		console.log(filterElement, filterId, returnElements);
 		if (filterElement && filterId) {
 			console.log('filtered get route')
-			const queryText = 'SELECT * FROM volunteers WHERE $1 = $2;';
+			const queryText = `SELECT * FROM volunteers where `.concat(String(filterElement), ' = $1', );
 			if (returnElements) {
-				console.log('also return modified get route')
+				console.log('also return modified get route');
 				const queryTextAdd = returnElements.split('&').join(', ');
 				queryText.replace('*', queryTextAdd);
 			}
-			
-			const { rows } = await db.query(queryText, [filterElement, filterId]);
-			console.log(rows);
-			res.locals.data = rows[0];
+			const query = {
+				text: queryText,
+				values: [String(filterId)],
+				rowMode: 'array',
+			}
+			console.log('i am about to run the aaaaaaa for getting volunteers with', queryText);
+			const response = await db.query(query);
+			console.log('these are the rows', response);
+			res.locals.data = response.rows[0];
 			return next();
 		}
 		console.log('plain get route');
